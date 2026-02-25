@@ -146,8 +146,8 @@
     }
 
     @keyframes ticker-scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(var(--ticker-shift, -100px)); }
+      0%   { transform: translateX(var(--ticker-shift, -100px)); }
+      100% { transform: translateX(0); }
     }
 
     /* Chevron */
@@ -601,7 +601,7 @@
         wrapper.appendChild(copy2);
 
         const shift = copy1.offsetWidth; // text + gap
-        const duration = shift / 38;    // 38 px/s scroll speed
+        const duration = shift / 20;    // 20 px/s scroll speed
         nameEl.style.setProperty('--ticker-duration', duration + 's');
         nameEl.style.setProperty('--ticker-shift', `-${shift}px`);
       }
