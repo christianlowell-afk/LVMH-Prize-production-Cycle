@@ -267,6 +267,24 @@
       display: block;
     }
 
+    /* ── Progress bar ── */
+    .progress-bar-wrap {
+      width: 167.292px;
+      height: 46.62px;
+      border-radius: 3px;
+      background: #F2F2F2;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #F8E69B 0%, #E0A142 33.87%, #DD6C6C 63.1%, #A01F68 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
     /* Hide day panels */
     .day-panel {
       display: none;
@@ -289,6 +307,10 @@
     <div class="tabs">
       <button class="tab active" data-day="1">Day 1</button>
       <button class="tab" data-day="2">Day 2</button>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill"></div>
     </div>
 
     <!-- Day 1 -->
@@ -622,18 +644,30 @@
     firebase.initializeApp(firebaseConfig);
     const checklistRef = firebase.database().ref('checklist');
 
+    function updateProgress() {
+      const activeDay = document.querySelector('.tab.active').dataset.day;
+      const panel = document.getElementById('day-' + activeDay);
+      const checkboxes = panel.querySelectorAll('input[type="checkbox"]');
+      const total = checkboxes.length;
+      const checked = Array.from(checkboxes).filter(c => c.checked).length;
+      const pct = total ? (checked / total) * 100 : 0;
+      document.getElementById('progress-fill').style.width = pct + '%';
+    }
+
     // Listen for remote changes and apply them to all checkboxes
     checklistRef.on('value', (snapshot) => {
       const data = snapshot.val() || {};
       document.querySelectorAll('input[data-key]').forEach(input => {
         input.checked = !!data[input.dataset.key];
       });
+      updateProgress();
     });
 
     // Write to Firebase whenever a checkbox is toggled locally
     document.addEventListener('change', (e) => {
       if (e.target.matches('input[data-key]')) {
         checklistRef.child(e.target.dataset.key).set(e.target.checked);
+        updateProgress();
       }
     });
 
@@ -688,6 +722,7 @@
         panel.classList.add('active');
         // Init tickers for newly visible panel
         panel.querySelectorAll('.item-name').forEach(initTicker);
+        updateProgress();
       });
     });
 
