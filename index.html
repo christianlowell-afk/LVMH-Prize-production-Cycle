@@ -181,7 +181,7 @@
     }
 
     .item.open .accordion {
-      max-height: 81.222px;
+      max-height: 120px;
     }
 
     .accordion-inner {
@@ -190,6 +190,16 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+    }
+
+    .accordion-time {
+      color: #000;
+      font-family: "Helvetica Neue";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: -0.54px;
     }
 
     .accordion-owner {
@@ -357,6 +367,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">Morning</span>
               <span class="accordion-owner">Oliver</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -382,6 +393,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">10:00–10:30AM</span>
               <span class="accordion-owner">Jonas, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -407,6 +419,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">10:30</span>
               <span class="accordion-owner">Virgil, Miriam</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -432,6 +445,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">10:45–11:45</span>
               <span class="accordion-owner">Virgil, Miriam</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -457,6 +471,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">11:00AM</span>
               <span class="accordion-owner">Jonas, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -482,6 +497,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">11:45–12:00</span>
               <span class="accordion-owner">Greg, Miriam</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -507,6 +523,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">12:00–1:00PM</span>
               <span class="accordion-owner">Miriam, Greta</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -525,20 +542,47 @@
       <div class="item">
         <div class="item-label">
           <div class="item-label-top">
-            <span class="item-name">Eva Chen Insights + Eva Chen IG</span>
+            <span class="item-name">Eva Chen Insights</span>
             <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">12:30–13:45PM</span>
               <span class="accordion-owner">Jonas, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
           </div>
         </div>
         <label class="item-checkbox">
-          <input type="checkbox" data-key="d2_eva_chen" />
+          <input type="checkbox" data-key="d2_eva_chen_insights" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Eva Chen IG</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">13:45–14:15</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_eva_chen_ig" />
           <div class="checkmark">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -557,6 +601,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">1:00PM</span>
               <span class="accordion-owner">Oliver</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -582,6 +627,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">2:00PM</span>
               <span class="accordion-owner">Virgil, Miriam, Greta</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -607,6 +653,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">2:30–3:30PM</span>
               <span class="accordion-owner">Greg, Greta</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -632,6 +679,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">2:30–4:00PM</span>
               <span class="accordion-owner">Oliver</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -657,6 +705,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">3:00–4:00PM</span>
               <span class="accordion-owner">Jonas, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -682,6 +731,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">TBD</span>
               <span class="accordion-owner">Greg, Ellen, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -707,6 +757,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">5:00PM</span>
               <span class="accordion-owner">Virgil, Greg, Miriam</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -732,6 +783,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">5:00PM</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
           </div>
@@ -749,13 +801,14 @@
       <div class="item">
         <div class="item-label">
           <div class="item-label-top">
-            <span class="item-name">Experts Take Away w/ DB (2)</span>
+            <span class="item-name">Experts Take Away w/ DB</span>
             <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">5:30PM</span>
               <span class="accordion-owner">Jonas, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -781,6 +834,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">6:30PM</span>
               <span class="accordion-owner">Jonas, Christian</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
@@ -806,6 +860,7 @@
           </div>
           <div class="accordion">
             <div class="accordion-inner">
+              <span class="accordion-time">All day</span>
               <span class="accordion-owner">Virgil, Miriam, Greta</span>
               <a href="#" target="_blank">View Original Document</a>
             </div>
