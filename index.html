@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LVMH Prize 2026 — Production Cycle</title>
+  <style>
+    @font-face {
+      font-family: 'HelveticaNeue';
+      src: url('https://raw.githubusercontent.com/christianlowell-afk/LVMH-Prize-production-Cycle/7ec3d3d63f0c87ad8f0be4c330c12356d93b4b69/HelveticaNeue-Medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      background: #fff;
+      color: #000;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── Header ── */
+    .header {
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      width: 327.23px;
+      height: 51.758px;
+      color: #000;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 25px;
+      letter-spacing: -0.9px;
+    }
+
+    /* ── Day Tabs ── */
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .tab {
+      width: 88.109px;
+      height: 46.62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 3px;
+      background: #F2F2F2;
+      cursor: pointer;
+      color: #B5B5B5;
+      font-family: "Helvetica Neue";
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: -0.75px;
+      text-align: center;
+      transition: color 0.15s;
+      padding: 0;
+    }
+
+    .tab.active {
+      color: #000;
+    }
+
+    /* ── List ── */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── Item row ── */
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    /* Text label box */
+    .item-label {
+      width: 304.61px;
+      min-height: 46.62px;
+      border-radius: 3px;
+      background: #F2F2F2;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: background 0.1s;
+      user-select: none;
+    }
+
+    .item-label:active {
+      background: #e8e8e8;
+    }
+
+    .item-label-top {
+      display: flex;
+      align-items: center;
+      min-height: 46.62px;
+      padding: 0 14px;
+    }
+
+    .item-name {
+      width: 194.094px;
+      flex: 1;
+      min-width: 0;
+      height: 28.712px;
+      overflow: hidden;
+      white-space: nowrap;
+      color: #000;
+      font-family: "Helvetica Neue";
+      font-size: 25px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: -0.75px;
+    }
+
+    /* Ticker */
+    .item-name .ticker-wrapper {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .item-name.has-ticker {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black calc(100% - 50px), transparent calc(100% - 20px));
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black calc(100% - 50px), transparent calc(100% - 20px));
+    }
+
+    .item-name.has-ticker .ticker-wrapper {
+      animation: ticker-scroll var(--ticker-duration, 6s) linear infinite;
+    }
+
+    @keyframes ticker-scroll {
+      0%   { transform: translateX(var(--ticker-shift, -100px)); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Chevron */
+    .chevron {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      opacity: 0.4;
+      transition: transform 0.2s ease;
+    }
+
+    .item.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Accordion body */
+    .accordion {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    .item.open .accordion {
+      max-height: 120px;
+    }
+
+    .accordion-inner {
+      padding: 10px 14px 14px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .accordion-time {
+      color: #000;
+      font-family: "Helvetica Neue";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: -0.54px;
+    }
+
+    .accordion-owner {
+      color: #757575;
+      font-family: "Helvetica Neue";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: -0.54px;
+    }
+
+    .accordion-inner a {
+      color: #000;
+      font-family: "Helvetica Neue";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: -0.54px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Checkbox square */
+    .item-checkbox {
+      width: 46.62px;
+      height: 46.62px;
+      border-radius: 3px;
+      background: #F2F2F2;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+    }
+
+    .item-checkbox:hover {
+      background: #e8e8e8;
+    }
+
+    .item-checkbox input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .checkmark {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid #bbb;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s, background 0.15s;
+      pointer-events: none;
+    }
+
+    .item-checkbox input:checked ~ .checkmark {
+      background: #111;
+      border-color: #111;
+    }
+
+    .checkmark svg {
+      display: none;
+    }
+
+    .item-checkbox input:checked ~ .checkmark svg {
+      display: block;
+    }
+
+    /* ── Progress bar ── */
+    .progress-bar-wrap {
+      width: 167.292px;
+      height: 46.62px;
+      border-radius: 3px;
+      background: #F2F2F2;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #F8E69B 0%, #E0A142 33.87%, #DD6C6C 63.1%, #A01F68 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Hide day panels */
+    .day-panel {
+      display: none;
+    }
+
+    .day-panel.active {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <div class="header">
+      <h1>LVMH Prize 2026<br>Production Cycle</h1>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-day="1">Day 1</button>
+      <button class="tab" data-day="2">Day 2</button>
+      <button class="tab" data-day="3">Day 3</button>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-panel active" id="day-1">
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Designer pov (Part 1)</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-owner">Jonas + Miriam</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d1_designer_pov_part1" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+    </div><!-- /day-1 -->
+
+    <!-- Day 2 -->
+    <div class="day-panel" id="day-2">
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Fashion Details in Film</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">Morning</span>
+              <span class="accordion-owner">Oliver</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_fashion_details_film" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Welcome to La Samaritaine w/ DB</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">10:00–10:30AM</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_welcome_samaritaine" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">DA Arrival</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">10:30</span>
+              <span class="accordion-owner">Virgil, Miriam</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_da_arrival" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Anna Wintour &amp; DA Meeting Designers</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">10:45–11:45</span>
+              <span class="accordion-owner">Virgil, Miriam</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_anna_wintour_da" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Experts Take Away w/ DB</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">11:00AM</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_experts_takeaway_1" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Group Photo</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">11:45–12:00</span>
+              <span class="accordion-owner">Greg, Miriam</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_group_photo" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Designer pov (Part 2) - Models Fittings</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">12:00–1:00PM</span>
+              <span class="accordion-owner">Miriam, Greta</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_designer_pov_2" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Eva Chen Insights</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">12:30–13:45PM</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_eva_chen_insights" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Eva Chen IG</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">13:45–14:15</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_eva_chen_ig" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Official Portraits by Oliver Bel</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">1:00PM</span>
+              <span class="accordion-owner">Oliver</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_official_portraits" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Models Walk</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">2:00PM</span>
+              <span class="accordion-owner">Virgil, Miriam, Greta</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_models_walk" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Designers &amp; Models</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">2:30–3:30PM</span>
+              <span class="accordion-owner">Greg, Greta</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_designers_models" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Models in Film</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">2:30–4:00PM</span>
+              <span class="accordion-owner">Oliver</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_models_film" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Flirt / Forever / Forget w/ VM</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">3:00–4:00PM</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_flirt_forever_forget" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">ITW with Hodakova</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">TBD</span>
+              <span class="accordion-owner">Greg, Ellen, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_itw_hodakova" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Ambassador Meeting Candidates</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">5:00PM</span>
+              <span class="accordion-owner">Virgil, Greg, Miriam</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_ambassador_candidates" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Anya Taylor-Joy and DA</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">5:00PM</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_anya_taylor_joy" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Experts Take Away w/ DB</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">5:30PM</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_experts_takeaway_2" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Cocktails Guests Outfits w/ DB</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">6:30PM</span>
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_cocktails_outfits" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Wrap Up Film Content</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-time">All day</span>
+              <span class="accordion-owner">Virgil, Miriam, Greta</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d2_wrap_up_film" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+    </div><!-- /day-2 -->
+
+    <!-- Day 3 -->
+    <div class="day-panel" id="day-3">
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Standout Piece</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-owner">Greg, Greta</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d3_standout_piece" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Flirt / Forever / Forget w/ VM</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-owner">Jonas, Christian</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d3_flirt_forever_forget" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="item-label">
+          <div class="item-label-top">
+            <span class="item-name">Wrap Up Film Content</span>
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion">
+            <div class="accordion-inner">
+              <span class="accordion-owner">Virgil, Miriam, Greta</span>
+              <a href="#" target="_blank">View Original Document</a>
+            </div>
+          </div>
+        </div>
+        <label class="item-checkbox">
+          <input type="checkbox" data-key="d3_wrap_up_film" />
+          <div class="checkmark">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+    </div><!-- /day-3 -->
+
+  </div><!-- /app -->
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+  <script>
+    // ── Firebase config — replace with your project's values ──
+    const firebaseConfig = {
+      apiKey:            "AIzaSyDPko-HvZ4dbmaaQhsoU80bLcHe6Vu06Jk",
+      authDomain:        "lvmh-prize-production-cycle.firebaseapp.com",
+      databaseURL:       "https://lvmh-prize-production-cycle-default-rtdb.firebaseio.com",
+      projectId:         "lvmh-prize-production-cycle",
+      storageBucket:     "lvmh-prize-production-cycle.firebasestorage.app",
+      messagingSenderId: "1034699102741",
+      appId:             "1:1034699102741:web:40283e5818df3e5f018c1c"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const checklistRef = firebase.database().ref('checklist');
+
+    function updateProgress() {
+      const activeDay = document.querySelector('.tab.active').dataset.day;
+      const panel = document.getElementById('day-' + activeDay);
+      const checkboxes = panel.querySelectorAll('input[type="checkbox"]');
+      const total = checkboxes.length;
+      const checked = Array.from(checkboxes).filter(c => c.checked).length;
+      const pct = total ? (checked / total) * 100 : 0;
+      document.getElementById('progress-fill').style.width = pct + '%';
+    }
+
+    // Listen for remote changes and apply them to all checkboxes
+    checklistRef.on('value', (snapshot) => {
+      const data = snapshot.val() || {};
+      document.querySelectorAll('input[data-key]').forEach(input => {
+        input.checked = !!data[input.dataset.key];
+      });
+      updateProgress();
+    });
+
+    // Write to Firebase whenever a checkbox is toggled locally
+    document.addEventListener('change', (e) => {
+      if (e.target.matches('input[data-key]')) {
+        checklistRef.child(e.target.dataset.key).set(e.target.checked);
+        updateProgress();
+      }
+    });
+
+    // ── Ticker for overflowing item names ──
+    function initTicker(nameEl) {
+      if (nameEl.dataset.tickerInit) return;
+      if (!nameEl.offsetParent) return; // skip hidden panels
+      nameEl.dataset.tickerInit = '1';
+
+      const text = nameEl.textContent.trim();
+      nameEl.textContent = '';
+
+      const wrapper = document.createElement('span');
+      wrapper.className = 'ticker-wrapper';
+
+      const copy1 = document.createElement('span');
+      copy1.className = 'ticker-copy';
+      copy1.textContent = text;
+      wrapper.appendChild(copy1);
+      nameEl.appendChild(wrapper);
+
+      if (copy1.offsetWidth > nameEl.offsetWidth) {
+        nameEl.classList.add('has-ticker');
+
+        const gap = 48;
+        copy1.style.paddingRight = gap + 'px';
+
+        const copy2 = document.createElement('span');
+        copy2.className = 'ticker-copy';
+        copy2.textContent = text;
+        copy2.style.paddingRight = gap + 'px';
+        wrapper.appendChild(copy2);
+
+        const shift = copy1.offsetWidth; // text + gap
+        const duration = shift / 20;    // 20 px/s scroll speed
+        nameEl.style.setProperty('--ticker-duration', duration + 's');
+        nameEl.style.setProperty('--ticker-shift', `-${shift}px`);
+      }
+    }
+
+    document.fonts.ready.then(() => {
+      document.querySelectorAll('.item-name').forEach(initTicker);
+    });
+
+    // ── Tab switching ──
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.getElementById('day-' + tab.dataset.day);
+        panel.classList.add('active');
+        // Init tickers for newly visible panel
+        panel.querySelectorAll('.item-name').forEach(initTicker);
+        updateProgress();
+      });
+    });
+
+    // ── Accordion toggle (clicking the label box, not the checkbox) ──
+    document.querySelectorAll('.item-label').forEach(label => {
+      label.addEventListener('click', () => {
+        const item = label.closest('.item');
+        item.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>
